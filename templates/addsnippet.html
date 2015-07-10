@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}
+Añadir un snippet
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <h3>Añadir un snippet</h3>
+        <div class="text-center text-danger">
+            <small>CUIDADO! <br> Esto es para agregar un snippet en la categoria general, si queres agregar un snippet a un grupo en particular and&aacute; al grupo y hac&eacute; click en el bot&oacute;n "Subir snippet al grupo".</small>
+        </div>
+        <form method="post">
+            <p>Titulo <br> {{ form.title(size=80) }}
+            {% for error in form.title.errors %}
+                <span style="label error">{{ error }}</span>
+            {% endfor %}</p>
+            <p>Lenguaje <br> {{ form.language }}</p>
+            <p>Description <br> {{ form.description(size=80) }}
+            {% for error in form.description.errors %}
+                <span style="label error">{{ error }}</span>
+            {% endfor %}</p>
+            <p>Contenido <br> {{ form.content(class="textarea_content") }}</p>
+            {% for error in form.content.errors %}
+                <span style="label error">{{ error }}</span>
+            {% endfor %}</p>
+            <input type="submit" value="Añadir snippet" class="btn btn-default">
+        </form>
+    </div>
+</div>
+{% endblock %}

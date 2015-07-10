@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}
+Añadir un snippet
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <h3>Añade un snippet a {{group.name}}</h3>
+        <form method="post">
+            <p>Titulo <br> {{ form.title(size=80) }}
+            {% for error in form.title.errors %}
+                <span style="color:red;">{{ error }}</span>
+            {% endfor %}</p>
+            <p>Lenguaje <br> {{ form.language }}</p>
+            <p>Descripción <br> {{ form.description(size=80) }}
+            {% for error in form.description.errors %}
+                <span style="color:red;">{{ error }}</span>
+            {% endfor %}</p>
+            <p>Contenido <br> {{ form.content(class="textarea_content") }}</p>
+            {% for error in form.content.errors %}
+                <span style="color:red;">{{ error }}</span>
+            {% endfor %}</p>
+            <input type="submit" value="Add snippet" class="btn btn-default">
+        </form>
+    </div>
+</div>
+{% endblock %}

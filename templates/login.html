@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %}
+Login
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <h3>Login</h3>
+        <form method="post" name="login">
+            
+            <p>Usuario: <br>{{ form_login.username(size=40) }}
+            {% for error in form_login.username.errors %}
+                <span class="label error">{{ error }}</span>
+            {% endfor %}</p>
+            <p>Contraseña: <br>{{ form_login.password(size=40) }}
+            {% for error in form_login.password.errors %}
+                <span class="label error">{{ error }}</span>
+            {% endfor %}</p>
+            <p>{{ form_login.remember }} Recordarme
+            {% for error in form_login.remember.errors %}
+                <span class="label error">{{ error }}</span>
+            {% endfor %}</p>
+            {% if error %}
+                <span class="label error">{{ error }}</span>
+            {% endif %}
+            <p><input type="submit" value="Login!" class="btn btn-default"></p>
+        </form>
+    </div>
+</div>
+{% endblock %}

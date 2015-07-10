@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}
+Signup
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <h3>Signup</h3>
+        <form method="post" name="signup">
+            <p>Usuario: <br>{{ form_signup.username(size=40) }}
+            {% for error in form_signup.username.errors %}
+                <span class="label error">{{ error }}</span>
+            {% endfor %}</p>
+            <p>Contraseña: <br>{{ form_signup.password(size=40) }}
+            {% for error in form_signup.password.errors %}
+                <span class="label error">{{ error }}</span>
+            {% endfor %}</p>
+            <p>Confirmar contraseña: <br>{{ form_signup.confirm(size=40) }}
+            {% for error in form_signup.confirm.errors %}
+                <span class="label error">{{ error }}</span>
+            {% endfor %}</p>
+            <p>Email (Opcional): <br>{{ form_signup.email(size=40) }}
+            {% for error in form_signup.email.errors %}
+                <span class="label error">{{ error }}</span>
+            {% endfor %}</p>
+            <p>{{ form_signup.accept_tos }} Accepto los <a href="#">Terminos del servicio</a>
+            {% for error in form_signup.accept_tos.errors %}
+                <span class="label error">{{ error }}</span>
+            {% endfor %}</p>
+            {% if error %}
+                <span class="label error">{{ error }}</span>
+            {% endif %}
+            <p><input type="submit" value="Signup!" class="btn btn-default"></p>
+        </form>
+    </div>
+</div>
+{% endblock %}

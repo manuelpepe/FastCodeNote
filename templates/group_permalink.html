@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}
+{{group.name}}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1 class="inline-block">{{group.name}}</h1>
+        <a href="/groups/{{group.key().id()}}/snippets/add" class="btn btn-primary pull-right mar-top-p26">
+            Subir snippet al grupo
+        </a>
+    </div>
+    <div class="page-header">
+        <h3>Snippets</h3>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Lenguaje</th>
+                <th>Nombre</th>
+                <th>Descripcion</th>
+                <th>Created</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for snippet in snippets %}
+            <tr>
+                <td>{{ snippet.language }}</td>
+                <td><a href="/snippets/{{snippet.key().id()}}">{{ snippet.title | truncate(40) }}</a></td>
+                <td>{{ snippet.description | truncate(100, True) }}</td>
+                <td>{{ snippet.created }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

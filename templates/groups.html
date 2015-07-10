@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}
+Grupos
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+        <h1>Grupos</h1>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for group in groups %}
+            <tr>
+                <td><a href="/groups/{{group.key().id()}}">{{ group.name | truncate(60) }}</a></td>
+                <td>{{ group.description | truncate(300, True) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

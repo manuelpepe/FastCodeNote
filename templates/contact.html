@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Contacto
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <h3>Contacto</h3>
+        <div class="text-center text-danger">
+            <small></small>
+        </div>
+        <form method="post">
+            <p>Nombre <br> {{ form.name(size=80) }}
+            {% for error in form.name.errors %}
+                <span style="label error">{{ error }}</span>
+            {% endfor %}</p>
+            <p>Email <br> {{ form.email }}</p>
+            {% for error in form.email.errors %}
+                <span style="label error">{{ error }}</span>
+            {% endfor %}</p>
+            <p>Asunto <br> {{ form.subject(size=80) }}
+            {% for error in form.subject.errors %}
+                <span style="label error">{{ error }}</span>
+            {% endfor %}</p>
+            <p>Conenido: <br> {{ form.body(class="textarea_content") }}</p>
+            {% for error in form.body.errors %}
+                <span style="label error">{{ error }}</span>
+            {% endfor %}</p>
+            {% if error %}
+                <span class="label error">{{ error }}</span>
+            {% endif %}
+            <input type="submit" value="Enviar!" class="btn btn-default">
+        </form>
+    </div>
+</div>
+{% endblock %}

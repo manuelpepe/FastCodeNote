@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}
+Añadir Grupo
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3">
+        <h3>Crea un grupo</h3>
+        <form method="post" name="login">
+            
+            <p>Nombre: <br>{{ form.name(size=40) }}
+            {% for error in form.name.errors %}
+                <span class="label error">{{ error }}</span>
+            {% endfor %}</p>
+            <p>Descripción: <br>{{ form.description(size=40) }}
+            {% for error in form.description.errors %}
+                <span class="label error">{{ error }}</span>
+            {% endfor %}</p>
+            {% if error %}
+                <span class="label error">{{ error }}</span>
+            {% endif %}
+            <p><input type="submit" value="Crear Grupo" class="btn btn-default"></p>
+        </form>
+    </div>
+</div>
+{% endblock %}

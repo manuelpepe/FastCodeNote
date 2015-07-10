@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}
+{{ snippet.title }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="snippet-header">
+            <div class="page-header">
+                <h2 class="inline-block">{{ snippet.title }}</h2> <small class="subtitle">{{ snippet.language }}</small>
+            </div>
+        </div>
+
+        <div class="well well-sm">
+            <strong>Creador:</strong> {{ snippet.owner.username }} - <strong>Grupo:</strong> 
+            {% if snippet.parent_group %}
+                <a href="/groups/{{snippet.parent_group.key().id()}}">{{ snippet.parent_group.name }}</a>
+            {% else %}
+                <a href="/snippets">General</a>
+            {% endif %}
+            <br>
+            {{ snippet.description }}
+            <br>
+        </div>
+        
+        <div class="snippet-body">
+            {% if snippet.language == 'Visual Basic' %}
+                <pre class="prettyprint lang-vb">{{ snippet.content }}</pre>
+            {% elif snippet.language == 'Python' %}
+                <pre class="prettyprint lang-py">{{ snippet.content }}</pre>
+            {% elif snippet.language == 'CSS' %}
+                <pre class="prettyprint lang-css">{{ snippet.content }}</pre>
+            {% elif snippet.language == 'C' %}
+                <pre class="prettyprint lang-c">{{ snippet.content }}</pre>
+            {% elif snippet.language == 'C++' %}
+                <pre class="prettyprint lang-cpp">{{ snippet.content }}</pre>
+            {% elif snippet.language == 'JavaScript' %}
+                <pre class="prettyprint lang-js">{{ snippet.content }}</pre>
+            {% elif snippet.language == 'Java' %}
+                <pre class="prettyprint lang-java">{{ snippet.content }}</pre>
+            {% elif snippet.language == 'SQL' %}
+                <pre class="prettyprint lang-sql">{{ snippet.content }}</pre>
+            {% elif snippet.language == 'Ruby' %}
+                <pre class="prettyprint lang-rb">{{ snippet.content }}</pre>
+            {% elif snippet.language == 'C#' %}
+                <pre class="prettyprint lang-cs">{{ snippet.content }}</pre>
+            {%endif%}
+        </div>
+
+        <div class="snippet-comments">
+            {% if user %}
+            <div class="new-comment-form">
+                <form method="post">
+                    <h5>Comentá:</h5>
+                    {{ comment_form.content(class="textarea_comment")}}
+                    {% for error in comment_form.content.errors %}
+                        {{ error }}
+                    {% endfor %}
+                    <input type="submit" value="Enviar comentario" class="btn btn-default">
+                </form>
+            </div>
+            {% endif %}
+            <div class="comments">
+                <ul class="list-group">
+                    {% for comment in comments %}
+                        <li class="list-group-item">
+                            <h5 class="list-group-item-heading"><strong>{{ comment.owner.username }}</strong></h5>
+                            <p class="list-item-group-text comment-text">{{ comment.content }}</p>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

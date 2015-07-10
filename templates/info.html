@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}
+Info
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header"><h1>Informaci&oacute;n</h1></div>
+    <div id="snippets">
+        <h3>Snippets:</h3>
+        <p><strong>Que es un snippet?</strong>
+            <br> Un snippet es un pequeño pedazo de codigo, usualmente reutilizable (<em>Usualmente, no necesariamente.</em>). Puede ser una función, un proceso, un objeto, cualquier cosa!.</p>
+        <p>En esta sección habrá una lista de <strong>todos</strong> los snippets subidos por <strong>todos</strong> los usuarios. No importa el grupo ni el lenguaje.</p>
+    </div>
+    <div class="grupos">
+        <h3>Grupos:</h3>
+        <p>En esta sección encontrarán una lista de grupos. La idea de esto es que halla un grupo para cada división/año/curso extracurricular donde
+            los alumnos (y profesores) puedan organizarse mejor y compartir snippets, tareas, trabajos practicos, etc.</p>
+    </div>
+    <div class="top-snippets">
+        <h3>Top Snippets:</h3>
+        <p>Esta sección está bajo construcción pero, como podrán imaginarse, habra un listado de los mejores snippets.</p>
+    </div>
+    <div class="extra">
+        <h3>Mas información:</h3>
+        <strong>En construcción:</strong>
+        <ul>
+            <li>Votos</li>
+            <li>Busqueda</li>
+            <li>Filtros</li>
+            <li>Tops</li>
+            <li><strike>Comentarios</strike> <strong>Añadido!</strong></li>
+        </ul>
+        <strong>FAQ</strong>
+        <p>Si tenes alguna pregunta/critica/comentario sobre la pagina podes enviarme un mail con el formulario de contacto <a href="/contacto">acá</a>.</p>
+        <hr>
+        Muchas gracias, Manuel Pepe.
+    </div>
+</div>
+{% endblock %}
