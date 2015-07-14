@@ -332,5 +332,5 @@ app = webapp2.WSGIApplication([
     ('/contacto/?', ContactPage),
     ('/snippets/search/?', SearchPage),
     ('/user/([a-zA-Z0-9_.-]+)', UserPage)
-], debug=True)
+], debug=False)
 
