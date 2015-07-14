@@ -48,7 +48,7 @@
                                     <p>Contraseña: <br>{{ form_signup.password(size=40) }}</p>
                                     <p>Confirmar: <br>{{ form_signup.confirm(size=40) }}</p>
                                     <p>Email (Opcional): <br>{{ form_signup.email(size=40) }}</p>
-                                    <p>{{ form_signup.accept_tos }} Accepto los <a href="#">Terminos del servicio</a></p>
+                                    <p>{{ form_signup.accept_tos }} Accepto los <a href="#">terminos del servicio</a></p>
                                     <p><input type="submit" value="Signup!" class="btn btn-default"></p>
                                 </form>
                             </ul>
@@ -58,10 +58,10 @@
             {% else %}
                 <div class="navbar-right mar-right-5">
                     <ul class="nav navbar-nav">
-                        <li><a href="#">{{ user['username'] }}</a></li>
-                        <li><a href="/snippets/add">Add Snippet</a></li>
+                        <li><a href="/user/{{user['username']}}">{{ user['username'] }}</a></li>
+                        <li><a href="/snippets/add">Añadir Snippet</a></li>
                         {% if user.level > 1 %}
-                            <li><a href="/groups/create">Add Group</a></li>
+                            <li><a href="/groups/create">Añadir Group</a></li>
                         {% endif %}
                         <li><a href="/logout">Logout</a></li>
                     </ul>
@@ -97,7 +97,11 @@
     <script src="https://google-code-prettify.googlecode.com/svn/trunk/src/lang-sql.js"></script>
     <!-- JQuery -->
     <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/jquery-ui.min.js"></script>
     <!-- Bootstrap js -->
     <script src="/static/js/bootstrap.min.js"></script>
+    <!-- Extras -->
+    {% block scripts %}
+    {% endblock %}
 </body>
 </html>

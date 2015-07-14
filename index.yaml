@@ -12,6 +12,12 @@ indexes:
 
 - kind: Snippet
   properties:
+  - name: owner
+  - name: created
+    direction: desc
+
+- kind: Snippet
+  properties:
   - name: parent_group
   - name: created
 

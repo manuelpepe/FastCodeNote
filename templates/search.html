@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Busqueda
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header text-center">
+        <h3>Busqueda</h3>
+    </div>
+    <div class="well well-lg text-center">
+        <label for="type_of_search">Buscar por:</label>
+        <select name="type_of_search" id="type_of_search">
+            <option value="title">Titulo</option>
+            <option value="lang">Lenguaje</option>
+            <option value="desc">Descripción</option>
+        </select>
+        <div class="text-center text-danger">
+            <small>ATENCIÓN! Las busquedas por titulo y descripción solo funcionan si se introduce el nombre <strong>completo</strong> del snippet. <br>
+                Esto es debido a como funciona actualmente la Datastore de Google.</small>
+        </div>
+        <div id="leng-search" style="display: none;">
+            <form method="get">
+                {{ s_form.language(class="little-input block") }}
+                <input type="submit" value="Buscar" class="btn btn-default search-button">
+            </form>
+        </div>
+        <div id="tit-search">
+            <form method="get">
+                {{ s_form.text(class="little-input")}}
+                <input type="hidden" name="param" value="title">
+                <input type="submit" value="Buscar" class="btn btn-default search-button">
+            </form>
+        </div>
+        <div id="desc-search" style="display: none;">
+            <form method="get">
+                {{ s_form.text(class="little-input")}}
+                <input type="hidden" name="param" value="description">
+                <input type="submit" value="Buscar" class="btn btn-default search-button">
+            </form>
+        </div>
+    </div>
+    <div>
+        {% if output %}
+            {% for x in output %}
+                {{ x }}
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/search_script.js"></script>
+{% endblock %}

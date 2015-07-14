@@ -150,22 +150,11 @@ def over_limit(conn, duration = 3600, limit = 2400):
     # WIP!
     pass
 
-### Mail function ####
-def send_email(data):
-    name = str(data['name'])
-    email = str(data['email'])
-    subject = str(data['subject'])
-    body = str(data['body'])
-
-    mail.send_mail()
-
-    # mail = mail.EmailMessage(sender = email, to = 'manuelpepe-dev@outlook.com.ar', subject = "%s - %s" % (subject, name), body = body)
-    # mail.sender = email
-    # mail.to = 'manuelpepe-dev@outlook.com.ar'
-    # mail.subject = "%s - %s" % (subject, name)
-    # mail.body = body
-    # mail.check_initialized()
-    # mail.send()
+#### Jinja Filters ####
+def format_date(value):
+    """ Returns only the date on format YYYY-MM-DD """
+    value = str(value)
+    return value.split(' ')[0]
 
 #### Random Functions ####
 def get_date():

@@ -36,7 +36,7 @@ class User(db.Model):
     def get_snippets(cls, username, amount = None):
         """ Returns a given amount of the snippets from a given user """
         try:
-            return cls.by_name(username).snippets.fetch(amount)
+            return cls.by_name(username).snippets.order('-created').fetch(amount)
         except AttributeError:
             return False
 
@@ -87,6 +87,18 @@ class Snippet(db.Model):
     def by_id(cls, snippet_id):
         """ Returns snippet by id """
         return Snippet.get_by_id(int(snippet_id))
+
+    @classmethod
+    def by_lang(cls, lang):
+        return Snippet.all().filter('language =', lang).run()
+
+    @classmethod
+    def by_title(cls, search):
+        return Snippet.all().filter('title =', search).run()
+
+    @classmethod
+    def by_desc(cls, search):
+        return Snippet.all().filter('description = ', search).run()
 
     @classmethod
     def get_comments(cls, snippet_id, amount = None):

@@ -28,6 +28,7 @@ from google.appengine.ext import db
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
                                autoescape = True)
+jinja_env.filters['format_date'] = format_date
 
 class Handler(webapp2.RequestHandler):
     def read_user_cookie(self):
@@ -145,7 +146,7 @@ class LogoutPage(Handler):
 class SnippetHomePage(Handler):
     def get(self):
         snippets = snippets_front_cache()
-        self.render('snippet_home.html', snippets = snippets)
+        self.render('snippet_home.html', snippets = snippets, search_form = SimpleSearchForm())
 
 class AddSnippetPage(Handler):
     def get(self):
@@ -274,10 +275,9 @@ class ContactPage(Handler):
             if error:
                 self.render('contact.html', form = form, error = error)
             else:
-                # mail.send_mail(form.data['email'], 'manuelpepe-dev@outlook.com.ar', form.data['subject'], form.data['body'])
                 msg = mail.EmailMessage()
-                msg.sender = 'mail@mail.com '
-                msg.to = 'mail@mail.com'
+                msg.sender = 'BetterTakeThisOff '
+                msg.to = 'AndAlsoThis ;)'
                 msg.subject = "%s - %s" % (form.data['subject'], form.data['name'])
                 msg.body = "%s ------------------ %s " % (form.data['email'], form.data['body'])
                 msg.check_initialized()
@@ -285,6 +285,33 @@ class ContactPage(Handler):
                 self.render('delivered.html')
         else:
             self.render('contact.html', form = form, error = error)
+
+class SearchPage(Handler):
+    def get(self):
+        lang = self.request.get('language')
+        text = self.request.get('text')
+        param = self.request.get('param')
+
+        output = None
+
+        if lang and not text:
+            output = Snippet.by_lang(lang)
+        if text and not lang:
+            if param == 'title':
+                output = Snippet.by_title(text)
+            elif param == 'description':
+                output = Snippet.by_desc(text)
+
+        self.render('search.html', s_form = SimpleSearchForm(), output = output)
+
+class UserPage(Handler):
+    def get(self, username):
+        u = User.by_name(username)
+        if u:
+            logging.error(len(User.get_snippets(username)))
+            self.render('user_profile.html', res_user = u, snippets = User.get_snippets(username))
+        else:
+            self.write('user_profile_fail.html', name = username)
 
 
 
@@ -302,6 +329,8 @@ app = webapp2.WSGIApplication([
     ('/groups/([0-9]+)/?', GroupPermalinkPage),
     ('/groups/([0-9]+)/snippets/add/?', GroupAddSnippetPage),
     ('/info/?', InformationPage),
-    ('/contacto/?', ContactPage)
+    ('/contacto/?', ContactPage),
+    ('/snippets/search/?', SearchPage),
+    ('/user/([a-zA-Z0-9_.-]+)', UserPage)
 ], debug=True)
 

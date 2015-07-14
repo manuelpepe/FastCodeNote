@@ -36,8 +36,20 @@ body { padding-top: 70px; }
   margin-top: 26px;
 }
 
+.mar-top-p10 {
+  margin-top:10px;
+}
+
 .inline-block {
   display:inline-block;
+}
+
+.inline { 
+  display: inline;
+}
+
+.block {
+  display: block;
 }
 
 .subtitle {
@@ -62,6 +74,15 @@ body { padding-top: 70px; }
 
 .comment-text {
   margin-left: 15px;
+}
+
+.little-input {
+  width: 50% !important;
+  margin: 10px auto !important; 
+}
+
+.search-button {
+  margin-bottom: -14px;
 }
 
 .jumbotron {
